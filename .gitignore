@@ -1,0 +1,18 @@
+# Chaves de API e Variáveis de Ambiente (CRÍTICO)
+.env
+*.env
+
+# Caches e Arquivos Temporários do Python
+__pycache__/
+*.py[cod]
+
+# Ambientes Virtuais
+venv/
+env/
+.venv/
+
+# Arquivos Temporários de Notebooks
+.ipynb_checkpoints/
+
+# Lixo de Sistema Operacional
+.DS_Store
