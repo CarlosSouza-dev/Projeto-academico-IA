@@ -1,0 +1,7 @@
+Mapa,Algoritmo,Custo Total,Nós Expandidos,Tempo (ms),Caminho
+Pequeno,Custo Uniforme,307,8,0.0335,"['Cianwood City', 'Whirl Islands', 'Olivine City', 'Ecruteak City', 'Mt. Mortar', 'Mahogany Town', 'Ice Path', 'Blackthorn City']"
+Pequeno,A*,307,8,0.0878,"['Cianwood City', 'Whirl Islands', 'Olivine City', 'Ecruteak City', 'Mt. Mortar', 'Mahogany Town', 'Ice Path', 'Blackthorn City']"
+Médio,Custo Uniforme,307,13,0.0728,"['Cianwood City', 'Whirl Islands', 'Olivine City', 'Ecruteak City', 'Mt. Mortar', 'Mahogany Town', 'Ice Path', 'Blackthorn City']"
+Médio,A*,307,13,0.0704,"['Cianwood City', 'Whirl Islands', 'Olivine City', 'Ecruteak City', 'Mt. Mortar', 'Mahogany Town', 'Ice Path', 'Blackthorn City']"
+Grande,Custo Uniforme,307,13,0.0472,"['Cianwood City', 'Whirl Islands', 'Olivine City', 'Ecruteak City', 'Mt. Mortar', 'Mahogany Town', 'Ice Path', 'Blackthorn City']"
+Grande,A*,307,13,0.0938,"['Cianwood City', 'Whirl Islands', 'Olivine City', 'Ecruteak City', 'Mt. Mortar', 'Mahogany Town', 'Ice Path', 'Blackthorn City']"
