@@ -57,13 +57,17 @@ COORD = {
 # com os estados vizinhos e o custo (distância) da viagem.
 # =====================================================================
 
-# 2.1 Mapa Pequeno - Sub-região Oeste de Johto (7 nós)
+# 2.1 Mapa Pequeno - Região de Johto (9 nós)
 MAPA_PEQUENO = {
     "Safari Zone": {"Cianwood City": 35},
     "Cianwood City": {"Safari Zone": 35, "Whirl Islands": 15},
     "Whirl Islands": {"Cianwood City": 15, "Olivine City": 85},
     "Olivine City": {"Whirl Islands": 85, "Ecruteak City": 75},
-    "Ecruteak City": {"Olivine City": 75}
+    "Ecruteak City": {"Olivine City": 75, "Mt. Mortar": 40},
+    "Mt. Mortar": {"Ecruteak City": 40, "Mahogany Town": 30},
+    "Mahogany Town": {"Mt. Mortar": 30, "Ice Path": 22},
+    "Ice Path": {"Mahogany Town": 22, "Blackthorn City": 40},
+    "Blackthorn City": {"Ice Path": 40},
 }
 
 # 2.2 Mapa Médio - Região de Johto (21 nós)
@@ -90,7 +94,7 @@ MAPA_MEDIO = {
     "New Bark Town": {"Cherrygrove City": 75, "Blackthorn City": 105, "Tohjo Falls": 165}
 }
 
-# 2.3 Mapa Grande - Região de Kanto (25 nós)
+# 2.3 Mapa Grande - Região de Kanto + Johto (36 nós)
 MAPA_GRANDE = {
     # ================= JOHTO =================
     "Safari Zone": {"Cianwood City": 35},
