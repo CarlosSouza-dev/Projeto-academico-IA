@@ -2,7 +2,7 @@ import heapq
 import itertools
 import math
 
-from mapas import COORD, MAPA_GRANDE, MAPA_MEDIO, MAPA_PEQUENO
+from mapas import COORD
 
 def calcular_heuristica_linha_reta(cidade_atual, cidade_destino):
     """
@@ -17,16 +17,8 @@ def calcular_heuristica_linha_reta(cidade_atual, cidade_destino):
     
     distancia_calc = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
     
-    # ATENÇÃO PARA A ARGUIÇÃO: Como as distâncias reais subiram muito na nova versão,
-    # dividimos a distância euclidiana imaginária por 10. Isso nos garante
-    # admissibilidade matemática absoluta, ou seja, h(n) nunca será maior que
-    # o percurso real h*(n), mantendo o algoritmo A* em estado ótimo.
-    return int(distancia_calc / 10)
-
-#Consultas impressindíveis:
-
-
-
+    # Garante que a heurística seja admissível (não superestima o custo real)
+    return distancia_calc / 10
 
 # --------------------------------------------------
 # ESTRUTURA BASE DA BUSCA (Classe Nó e Reconstrução)
@@ -43,7 +35,7 @@ class No:
         self.g = g              # O custo acumulado g(n) desde o início
 
     def __lt__(self, outro):
-        # Necessário para a fila de prioridade (heapq) desempatar nós
+        # Permite que o heapq compare nós com base no custo g(n) acumulado.
         return self.g < outro.g
 
 def reconstruir_caminho(no):
@@ -57,7 +49,7 @@ def reconstruir_caminho(no):
 # =====================================================================
 # TASK 1.2: BUSCA NÃO INFORMADA (Custo Uniforme)
 # =====================================================================
-def busca_custo_uniforme(inicio, objetivo):
+def busca_custo_uniforme(inicio, objetivo, mapa):
     """
     Busca Cega: Expande sempre o nó de menor custo real acumulado g(n).
     Não faz ideia de onde o destino fica (ignora a heurística).
@@ -65,7 +57,7 @@ def busca_custo_uniforme(inicio, objetivo):
     contador = itertools.count() 
     fronteira = []
     # Fila de prioridade: (prioridade, desempate, nó)
-    # A prioridade aqui é apenas o custo real passado: g(n)
+    # A prioridade é o custo acumulado g(n) do nó.
     heapq.heappush(fronteira, (0, next(contador), No(inicio)))
     explorados = set()
     ordem = []
@@ -82,7 +74,7 @@ def busca_custo_uniforme(inicio, objetivo):
         explorados.add(no.estado)
         ordem.append(no.estado)
 
-        for vizinho, custo in MAPA_GRANDE[no.estado].items():
+        for vizinho, custo in mapa[no.estado].items():
             if vizinho in explorados:
                 continue
             
@@ -97,7 +89,7 @@ def busca_custo_uniforme(inicio, objetivo):
 # =====================================================================
 # TASK 1.3: BUSCA INFORMADA (Algoritmo A*)
 # =====================================================================
-def a_estrela(inicio, objetivo):
+def a_estrela(inicio, objetivo, mapa):
     """
     Busca Inteligente: Ordena a fronteira por f(n) = g(n) + h(n).
     Soma o custo real percorrido com a estimativa de distância até o alvo.
@@ -123,16 +115,16 @@ def a_estrela(inicio, objetivo):
         explorados.add(no.estado)
         ordem.append(no.estado)
 
-        for vizinho, custo in MAPA_GRANDE[no.estado].items():
+        for vizinho, custo in mapa[no.estado].items():
             if vizinho in explorados:
                 continue
             
             filho = No(vizinho, pai=no, acao=vizinho, g=no.g + custo)
             
-            # O "Pulo do Gato" do A*: calcular a heurística do vizinho
+            # Calcula a heurística do vizinho em relação ao objetivo
             h_vizinho = calcular_heuristica_linha_reta(vizinho, objetivo)
             
-            # A prioridade é a soma: Passado + Futuro
+            # Calcula f(n) = g(n) + h(n) para o vizinho
             f = filho.g + h_vizinho
             
             heapq.heappush(fronteira, (f, next(contador), filho))
