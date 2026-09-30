@@ -1,7 +1,6 @@
 import os
 import math
 import matplotlib.pyplot as plt
-from adjustText import adjust_text
 from mapas import COORD
 
 VERMELHO_IESB = "#C8102E"
