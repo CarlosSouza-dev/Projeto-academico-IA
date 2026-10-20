@@ -1,17 +1,22 @@
 import os
+from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
 
-def gerar_graficos(df_ou_csv=None, pasta_saida="../outputs/graficos"):
+CSV_PADRAO = Path(__file__).resolve().parent.parent / "outputs" / "csv" / "benchmark_resultados.csv"
+
+
+def gerar_graficos(df_ou_csv=None, pasta_saida=CSV_PADRAO.parent.parent / "graficos"):
     # Cria a pasta de saída se não existir
     os.makedirs(pasta_saida, exist_ok=True)
 
     # Trata a entrada (caminho str, DataFrame ou None)
     if df_ou_csv is None:
-        caminho_csv = os.path.join(pasta_saida, "benchmark_resultados.csv")
-        df = pd.read_csv(caminho_csv)
+        # CORREÇÃO: antes procurava o CSV dentro da pasta de gráficos, mas o
+        # CSV é gravado em ../outputs/csv -> "python graficos.py" quebrava.
+        df = pd.read_csv(CSV_PADRAO)
     elif isinstance(df_ou_csv, str):
         df = pd.read_csv(df_ou_csv)
     else:
