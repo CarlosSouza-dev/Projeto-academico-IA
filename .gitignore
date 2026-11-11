@@ -16,3 +16,6 @@ env/
 
 # Lixo de Sistema Operacional
 .DS_Store
+
+# Testes
+.pytest_cache/
